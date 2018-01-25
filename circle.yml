@@ -1,0 +1,24 @@
+general:
+  branches:
+    only:
+      - master
+
+checkout:
+  post:
+    - git config --global user.name "Alex Pott (via CircleCI)"
+    - git config --global user.email "alex.a.pott+strict-core-dev-dependencies@gmail.com"
+    - ./circle-checkout.sh
+
+dependencies:
+  cache_directories:
+    - "tmp/drupal"
+
+test:
+  post:
+    - echo "."
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - ./build.sh
