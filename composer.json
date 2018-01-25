@@ -1,0 +1,6 @@
+{
+    "name": "alexpott/strict-core-dev-dependencies",
+    "type": "metapackage",
+    "description": "Locked core dev dependencies",
+    "license": "GPL-2.0-or-later"
+}
