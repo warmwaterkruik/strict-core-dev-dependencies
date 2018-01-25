@@ -51,7 +51,12 @@ class Dumper {
     $this->getBranch($this->reference);
     $wc = $this->repository->getWorkingCopy();
     if (!$this->repository->getReferences()->hasRemoteBranch('origin/' . $this->branch)) {
-      $this->repository->run('checkout', ['--orphan', $this->branch]);
+      if ($this->repository->getReferences()->hasBranch($this->branch)) {
+        $this->repository->run('checkout', [$this->branch]);
+      }
+      else {
+        $this->repository->run('checkout', ['--orphan', $this->branch]);
+      }
       $this->repository->run('rm', ['--cached', '-r', '-f', '.']);
     }
     else {
