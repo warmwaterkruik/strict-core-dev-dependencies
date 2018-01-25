@@ -54,6 +54,8 @@ foreach ($sorted as $version) {
   $repository->run('reset', ['--hard', $ref->getCommitHash()]);
   $path = $repository->getPath() . '/composer.lock';
   if (file_exists($path)) {
+    // Create a new repository object so local references are up-to-date.
+    $metapackage_repository = new Repository('tmp/metapackage');
     $packageBuilder = PackageBuilder::fromLockfile($path);
     $dump = new Dumper($ref, $packageBuilder->buildPackage(), $metapackage_repository);
     $dump->write();
